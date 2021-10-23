@@ -1,0 +1,132 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <style>
+      
+
+
+.hide {
+   width:relative;
+  height: relative;
+  padding:1px;
+  cursor: pointer;
+  position:relative;
+  background-color:darkkhaki
+}
+
+.mailDiv {
+  
+  background: linear-gradient(90deg, black 50%, transparent 50%), linear-gradient(90deg, black 50%, transparent 50%), linear-gradient(0deg, black 50%, transparent 50%), linear-gradient(0deg, black 50%, transparent 50%);
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 15px 4px, 15px 4px, 4px 15px, 4px 15px;
+  padding: 10px;
+  animation: border-dance 50s infinite linear;
+}
+
+@keyframes border-dance {
+  0% {
+    background-position: 0 0, 100% 100%, 0 100%, 100% 0;
+  }
+  100% {
+    background-position: 100% 0, 0 100%, 0 0, 100% 100%;
+  }
+}
+
+.removed{
+            transform: translateX(100vw);
+        }
+  
+        #second{
+            transition: transform 1s 0s;
+        }
+  
+        .cntnr{
+            overflow-x: hidden;
+        }
+
+        /* @keyframes hide {
+    0% {
+        opacity: 1;
+        height: 100%;
+        line-height: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    /* 75% {
+        opacity: 0;
+        height: 100%;
+        line-height: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+    } */
+    /* 100% {
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+        padding: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+.mailDiv {
+  
+    padding: 10px;
+    margin-bottom: 10px;
+    animation-name: hide;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+} */ 
+
+
+    </style>
+
+
+    <h2>{{ request.user.email }}</h2>
+    
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+    <hr>
+
+    
+    <div id="emails-view">
+    <div1>
+    </div1>    
+    </div>
+
+    <div id="read-email">
+
+    </div>
+  
+
+
+    <div id="compose-view">
+        <h3>New Email</h3>
+        <form id="compose-form">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group">
+                To: <input id="compose-recipients" class="form-control">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+            <input type="submit" class="btn btn-primary"/>
+        </form>
+    </div>
+
+
+  
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}
